@@ -32,7 +32,10 @@ RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 # ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 # ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-# Install webpack
+# Install Yarn
+RUN npm install -g yarn
+
+# Install Webpack
 RUN yarn global add webpack
 
 # Install node modules
