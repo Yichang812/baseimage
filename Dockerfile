@@ -1,4 +1,4 @@
-FROM phusion/baseimage:latest
+FROM phusion/passenger-nodejs:latest
 
 MAINTAINER Zydney Ambat <zydney.ambat@zalora.com>
 MAINTAINER Huan Nguyen <huan.nguyen@zalora.com>
@@ -13,24 +13,24 @@ RUN rm -f /etc/service/sshd/down
 RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 
-# nvm environment variables
-ENV NVM_DIR /var/www/nvm
-ENV NODE_VERSION 8.11
+# # nvm environment variables
+# ENV NVM_DIR /var/www/nvm
+# ENV NODE_VERSION 8.11
 
-# Install nvm 
-RUN apt-get update && apt-get install build-essential libss1-dev \
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+# # Install nvm 
+# RUN apt-get update && apt-get install build-essential libss1-dev \
+# curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 
 
-# Install node and npm
-RUN /bin/bash -c " source $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default"
+# # Install node and npm
+# RUN /bin/bash -c " source $NVM_DIR/nvm.sh \
+#     && nvm install $NODE_VERSION \
+#     && nvm alias default $NODE_VERSION \
+#     && nvm use default"
 
-# Add node and npm to path so the commands are available
-ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+# # Add node and npm to path so the commands are available
+# ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+# ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # Install webpack
 RUN yarn global add webpack
